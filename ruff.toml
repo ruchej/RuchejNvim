@@ -1,0 +1,36 @@
+# Ruff configuration file
+# Applies to all Python projects without their own ruff.toml or pyproject.toml
+# https://docs.astral.sh/ruff/configuration/
+
+[lint]
+# Enable common linters
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import sorting) - СОРТИРОВКА ИМПОРТОВ
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+
+# Ignore specific rules
+ignore = [
+    "E501",  # line too long (handled by formatter)
+]
+
+[format]
+# Use Black-compatible formatting
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[lint.isort]
+# Import sorting options
+combine-as-imports = true           # from x import y as z -> from x import y as z
+force-sort-within-sections = true   # Сортировать внутри секций
+known-first-party = []              # Твои собственные модули (добавь при необходимости)
+known-third-party = []              # Сторонние модули (добавь при необходимости)
+
+# Пример: для Django проекта
+# known-first-party = ["myproject", "myapp"]
