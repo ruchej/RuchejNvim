@@ -23,7 +23,7 @@ dashboard.section.buttons.val = {
     dashboard.button('f', '  Найти файл', '<cmd>FzfLua files<cr>'),
     dashboard.button('r', '  Недавние', '<cmd>FzfLua oldfiles<cr>'),
     dashboard.button('g', '  Grep', '<cmd>FzfLua live_grep<cr>'),
-    dashboard.button('s', '⚙️  Настройки', '<cmd>cd ' .. config_path .. '<CR><cmd>Neotree reveal<cr>'),
+    dashboard.button('s', '⚙️ Настройки', '<cmd>cd ' .. config_path .. '<CR><cmd>Neotree reveal<cr>'),
     dashboard.button('l', '󰒲  Lazy', '<cmd>Lazy<cr>'),
     dashboard.button('q', '  Выход', '<cmd>qa<cr>'),
 }
