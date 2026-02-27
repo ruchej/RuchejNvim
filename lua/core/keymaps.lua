@@ -3,31 +3,29 @@ local km = vim.keymap.set
 
 -- === General ===
 -- Clear search highlight
-km('n', ',<space>', '<cmd>noh<cr>', { desc = 'Clear search highlight' })
+km('n', '<leader><space>', '<cmd>noh<cr>', { desc = 'Clear search highlight' })
 
 -- Escape from insert mode with jk
 km('i', 'jk', '<Esc>', { desc = 'Exit insert mode' })
 
--- Toggle fold with double space (like old config)
-km('n', '<space><space>', 'za', { desc = 'Toggle fold' })
-
--- === Buffer management ===
-local func = require('core.functions')
+-- Toggle fold with z (mnemonic: fold/zoom)
+km('n', '<leader>z', 'za', { desc = 'Toggle fold' })
 
 -- Next buffer
-km('n', 'gn', function() func.next_buffer() end, { desc = 'Next buffer' })
+km('n', '<leader>bn', '<cmd>bn<cr>', { desc = 'Next buffer' })
 
 -- Previous buffer
-km('n', 'gp', function() func.prev_buffer() end, { desc = 'Previous buffer' })
+km('n', '<leader>bp', '<cmd>bp<cr>', { desc = 'Previous buffer' })
 
 -- Close buffer using Bclose (from bclose.vim plugin)
-km('n', 'gw', '<cmd>Bclose<cr>', { desc = 'Close buffer' })
+km('n', '<leader>bd', '<cmd>Bclose<cr>', { desc = 'Close buffer' })
 
 -- === Neo-tree file explorer ===
 km('n', '<C-n>', '<cmd>Neotree toggle<cr>', { desc = 'Toggle Neo-tree' })
+km('n', '<leader>n', '<cmd>Neotree reveal<cr>', { desc = 'Reveal current file in Neo-tree' })
 
 -- === Markdown preview ===
-km('n', '<C-p>', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'Toggle Markdown preview' })
+km('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<cr>', { desc = 'Toggle Markdown preview' })
 
 -- === FZF Lua (fuzzy finder) - lazy load ===
 km('n', '<leader>ff', function() require('fzf-lua').files() end, { desc = 'Find files' })
@@ -35,7 +33,7 @@ km('n', '<leader>fg', function() require('fzf-lua').live_grep() end, { desc = 'L
 km('n', '<leader>fb', function() require('fzf-lua').buffers() end, { desc = 'Buffers' })
 km('n', '<leader>fh', function() require('fzf-lua').helptags() end, { desc = 'Help tags' })
 km('n', '<leader>fm', function() require('fzf-lua').keymaps() end, { desc = 'Keymaps' })
-km('n', '<leader>fr', function() require('fzf-lua').recent() end, { desc = 'Recent files' })
+km('n', '<leader>fo', function() require('fzf-lua').oldfiles() end, { desc = 'Old files' })
 km('n', '<leader>fc', function() require('fzf-lua').commands() end, { desc = 'Commands' })
 
 -- === LSP ===
@@ -125,7 +123,7 @@ km('n', '<leader>b', function() require('dap').toggle_breakpoint() end, { desc =
 km('n', '<F9>', function() require('dap').continue() end, { desc = 'Start/Continue debugging' })
 km('n', '<F8>', function() require('dap').step_over() end, { desc = 'Step over' })
 km('n', '<F7>', function() require('dap').step_into() end, { desc = 'Step into' })
-km('n', '<M-F8>', function() require('dap').repl.open() end, { desc = 'Open REPL' })
+km('n', '<leader>dr', function() require('dap').repl.open() end, { desc = 'Open DAP REPL' })
 km('n', '<leader>di', function() require('dap.ui.variables').hover() end, { desc = 'Hover variable' })
 km('v', '<leader>di', function() require('dap.ui.variables').visual_hover() end, { desc = 'Visual hover variable' })
 km('n', '<leader>dui', function() require('dapui').toggle() end, { desc = 'Toggle DAP UI' })
@@ -137,3 +135,8 @@ km('n', '<leader>hp', function() require('gitsigns').nav_hunk('prev') end, { des
 km('n', '<leader>hv', function() require('gitsigns').preview_hunk() end, { desc = 'Preview git hunk' })
 km('n', '<leader>td', function() require('gitsigns').preview_hunk_inline() end, { desc = 'Preview inline diff' })
 km('n', '<leader>gb', function() require('gitsigns').blame_line() end, { desc = 'Git blame line' })
+
+-- === LazyGit ===
+km('n', '<leader>gg', '<cmd>LazyGit<cr>', { desc = 'Open LazyGit' })
+km('n', '<leader>gf', '<cmd>LazyGitFilter<cr>', { desc = 'LazyGit filter' })
+km('n', '<leader>gc', '<cmd>LazyGitCurrentFile<cr>', { desc = 'LazyGit current file' })

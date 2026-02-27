@@ -22,7 +22,7 @@ end
 
 lazy.setup({
     -- Colorscheme
-    { 'morhetz/gruvbox',         lazy = false,         priority = 1000 },
+    { 'morhetz/gruvbox', lazy = false, priority = 1000 },
 
     -- Mason (only installs servers, not config)
     {
@@ -42,25 +42,10 @@ lazy.setup({
         dependencies = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
+            'nvim-lua/plenary.nvim',
         },
         config = function() require('lsp') end,
     },
-
-    -- Neo-tree
-    {
-        'nvim-neo-tree/neo-tree.nvim',
-        branch = 'v3.x',
-        cmd = 'Neotree',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'nvim-tree/nvim-web-devicons',
-            'MunifTanjim/nui.nvim',
-        },
-        opts = {},
-    },
-
-    -- Gitsigns
-    { 'lewis6991/gitsigns.nvim', event = 'BufReadPre', opts = {} },
 
     -- Bclose for buffer closing (загружается сразу для команды Bclose)
     { 'rbgrouleff/bclose.vim', lazy = false },
@@ -119,6 +104,64 @@ lazy.setup({
         end,
         ft = { 'markdown' },
     },
+
+    -- Surround
+    {
+        'kylechui/nvim-surround',
+        version = '^4.0.0',
+        event = 'VeryLazy',
+    },
+
+    { 'easymotion/vim-easymotion' },
+
+    -- Rainbow CSV (colorize CSV columns)
+    {
+        'mechatroner/rainbow_csv',
+        ft = { 'csv', 'tsv' },
+    },
+
+    -- LazyGit (git TUI)
+    {
+        'kdheepak/lazygit.nvim',
+        cmd = {
+            'LazyGit',
+            'LazyGitConfig',
+            'LazyGitCurrentFile',
+            'LazyGitFilter',
+            'LazyGitFilterCurrentFile',
+        },
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+    },
+
+    -- Which-key (keymaps popup)
+    {
+        'folke/which-key.nvim',
+        event = 'VeryLazy',
+        opts = {
+            plugins = { spelling = true },
+            defaults = {},
+            win = {
+                border = 'rounded',
+                padding = { 2, 2, 2, 2 },
+            },
+        },
+    },
+
+    -- Alpha dashboard
+    {
+        'goolord/alpha-nvim',
+        lazy = false,
+        priority = 100,
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function() require('plugins.dashboard') end,
+    },
+
+    -- Import other plugins from separate files
+    { import = 'plugins.neo-tree' },
+    { import = 'plugins.gitsigns' },
+    { import = 'plugins.indent-blankline' },
 }, {
     install = { colorscheme = { 'gruvbox' } },
     checker = { enabled = false }, -- Отключить автопроверку обновлений
@@ -129,7 +172,3 @@ pcall(function() vim.cmd('colorscheme gruvbox') end)
 
 -- Keymaps
 require('core.keymaps')
-
--- Plugin configs
-require('plugins.neo-tree')
-require('plugins.gitsigns')
